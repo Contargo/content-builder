@@ -64,6 +64,17 @@ types.
 There's more information and concrete definitions in the project Java API
 documentation.
 
+## Known Issues
+
+Compatibility with JSON serialization, currently assumes the use of
+[Jackson Databind][1]. This might change in the future, to suite more use-
+cases.
+
+_We use `jackson-annotations` to ensure omission of empty properties when
+serializing to JSON._
+
+ [1]: https://github.com/FasterXML/jackson-databind
+
 ## Development ##
 
 This is a pretty straight-forward Java-project, use `mvn` to build,

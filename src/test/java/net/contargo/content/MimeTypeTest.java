@@ -13,8 +13,8 @@ public class MimeTypeTest {
     @Test
     public void ensureDeclaredContentMimeTypeConstants() {
 
-        assertEquals("text/vnd.contargo.subject", ContentMimeType.TEXT_SUBJECT);
-        assertEquals("text/vnd.contargo.description", ContentMimeType.TEXT_DESCRIPTION);
-        assertEquals("text/vnd.contargo.body", ContentMimeType.TEXT_BODY);
+        assertEquals("text/vnd.contargo.subject", MimeType.TEXT_SUBJECT.getMimeType());
+        assertEquals("text/vnd.contargo.description", MimeType.TEXT_DESCRIPTION.getMimeType());
+        assertEquals("text/vnd.contargo.body", MimeType.TEXT_BODY.getMimeType());
     }
 }

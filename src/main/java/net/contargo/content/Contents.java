@@ -97,10 +97,10 @@ public final class Contents {
         List<Content> asList();
     }
 
-    private static class ContentBuilder implements Buildable {
+    private static final class ContentBuilder implements Buildable {
 
-        private Contents contents;
-        private MimeType mimeType;
+        private final Contents contents;
+        private final MimeType mimeType;
 
         private ContentBuilder(MimeType mimeType, Contents contents) {
 

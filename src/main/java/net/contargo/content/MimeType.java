@@ -1,5 +1,8 @@
 package net.contargo.content;
 
+import java.util.Objects;
+
+
 /**
  * The declared constant content mime-types.
  *
@@ -92,5 +95,35 @@ public final class MimeType {
     private static MimeType of(String mimeTypeValue) {
 
         return new MimeType(mimeTypeValue);
+    }
+
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hashCode(mimeType);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj instanceof String) {
+            return Objects.equals(mimeType, obj);
+        }
+
+        if (obj instanceof MimeType) {
+            return Objects.equals(mimeType, ((MimeType) obj).mimeType);
+        }
+
+        return false;
     }
 }

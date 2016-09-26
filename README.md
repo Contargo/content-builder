@@ -59,7 +59,7 @@ For example `text/vnd.contargo.description` is defined from the pattern:
 With the option to use subtypes and charset definitions, just as with media
 types.
 
-    '${type}/vnd.contargo.${name}+${subtype};charset=${charset}'
+    '${type}/vnd.contargo.${name}+${subtype};${params}'
 
 There's more information and concrete definitions in the project Java API
 documentation.

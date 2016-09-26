@@ -18,19 +18,23 @@ import java.util.Objects;
  *
  * <pre><code>
 ${type}/vnd.contargo.${name}
-${type}/vnd.contargo.${name};charset=${charset}
+${type}/vnd.contargo.${name};${params}
 ${type}/vnd.contargo.${name}+${subtype}
-${type}/vnd.contargo.${name}+${subtype};charset=${charset}
+${type}/vnd.contargo.${name}+${subtype};${params}
    </code></pre>
  *
  * <p>The constant {@code vnd.contargo} is our vendor specifier. Which for our purposes is <strong>mandatory</strong>.
- * The {@code type}, {@code subtype} and {@code charset} values, try to follow the way that IANA/RFC based media types
+ * The {@code type}, {@code subtype} and {@code params} values, try to follow the way that IANA/RFC based media types
  * are declared.</p>
  *
  * <p>What we describe with {@code name} should hopefully have some semantic but still be open for broad use. We always
  * try to define these types with documentation, as a hint for developers.</p>
  *
- * <p>Here's an example of what a mime type could look like: <code>image/vnd.contargo.appicon+svg</code></p>
+ * <p>Here's an example of what a mime type could look like: <code>text/vnd.contargo.appicon+uri;class=small</code></p>
+ *
+ * <p>In this example a mime-type <em>parameter</em> is used to mark the content with a <code>class</code>, this is not
+ * a specific parameter but an option for the authoring code, as means to extend the specification of the provided
+ * content, to the user.</p>
  *
  * @author  Olle Törnström - toernstroem@synyx.de
  * @since  0.1
@@ -38,38 +42,75 @@ ${type}/vnd.contargo.${name}+${subtype};charset=${charset}
 public final class MimeType {
 
     /**
-     * A subject should describe and give context to some content in a single line of text.
+     * @see  #TEXT_SUBJECT
+     */
+    public static final String TEXT_SUBJECT_VAL = "text/vnd.contargo.subject";
+
+    /**
+     * @see  #TEXT_DESCRIPTION
+     */
+    public static final String TEXT_DESCRIPTION_VAL = "text/vnd.contargo.description";
+
+    /**
+     * @see  #TEXT_BODY
+     */
+    public static final String TEXT_BODY_VAL = "text/vnd.contargo.body";
+
+    /**
+     * @see  #TEXT_APPICON
+     */
+    public static final String TEXT_APPICON_VAL = "text/vnd.contargo.appicon";
+
+    /**
+     * A subject should describe and give context to some content in a single line of text: <code>
+     * {@value #TEXT_SUBJECT_VAL}</code>.
      *
      * <p>For example an email or message subject line, describing the contents.</p>
      */
-    public static final MimeType TEXT_SUBJECT = MimeType.of("text/vnd.contargo.subject");
+    public static final MimeType TEXT_SUBJECT = MimeType.of(TEXT_SUBJECT_VAL);
 
     /**
-     * The description should, in a summary or short amount of text, give information about some content.
+     * The description should, in a summary or short amount of text, give information about some content: <code>
+     * {@value #TEXT_DESCRIPTION_VAL}</code>.
      *
      * <p>For example a clarification on some piece of information, such as it's type, structure or classification -
      * currently used to describe the domain type of a search-result.</p>
      */
-    public static final MimeType TEXT_DESCRIPTION = MimeType.of("text/vnd.contargo.description");
+    public static final MimeType TEXT_DESCRIPTION = MimeType.of(TEXT_DESCRIPTION_VAL);
 
     /**
-     * Some text that represents the full content of some information.
+     * Some text that represents the full content of some information: <code> {@value #TEXT_BODY_VAL}</code>
      *
      * <p>For example a message body, from a service or machine, that has to be sent and persisted in multiple
      * languages.</p>
      */
-    public static final MimeType TEXT_BODY = MimeType.of("text/vnd.contargo.body");
+    public static final MimeType TEXT_BODY = MimeType.of(TEXT_BODY_VAL);
+
+    /**
+     * Describes an application icon image resource reference, such as a path or a URI: <code>{@value #TEXT_APPICON_VAL}</code>.
+     *
+     * <p>Typically provided for the rendering of a size-independent (scalable) image or background. More specifically,
+     * the URI to an application's SVG icon resource.</p>
+     *
+     * <p>NOTE: It is intended for the content author to optionally extend the content with a classification, which may
+     * allow for more suitable use by the client. Such classifications are preferably to apply with a mime-type
+     * parameter, for example: {@code ;class=small}</p>
+     *
+     * @since  0.2
+     */
+    public static final MimeType TEXT_APPICON = MimeType.of(TEXT_APPICON_VAL);
 
     private final String mimeType;
 
     /**
      * Constructs a new mime type with the given value.
      *
-     * <p>Only available to the static factory methods.</p>
+     * <p>Absolutely <strong>no checks or validations made</strong>. The provided mime type string will be used
+     * as-is.</p>
      *
      * @param  mimeType  value to create
      */
-    private MimeType(String mimeType) {
+    public MimeType(String mimeType) {
 
         this.mimeType = mimeType;
     }

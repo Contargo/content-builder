@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -90,11 +92,20 @@ public final class Contents {
     public interface Buildable extends Appendable {
 
         /**
-         * Builds the resulting contents as a list.
+         * Builds the resulting contents as a list of strongly typed content entries.
          *
          * @return  a list of content entries
          */
         List<Content> asList();
+
+
+        /**
+         * Builds the resulting content as a collection of maps, reducing avoiding the content type to be bound to the
+         * instance.
+         *
+         * @return  a list of map entries
+         */
+        List<Map<String, Object>> asMap();
     }
 
     private static final class ContentBuilder implements Buildable {
@@ -153,6 +164,13 @@ public final class Contents {
         public List<Content> asList() {
 
             return Collections.unmodifiableList(new ArrayList<>(this.contents.values));
+        }
+
+
+        @Override
+        public List<Map<String, Object>> asMap() {
+
+            return this.contents.values.stream().map(Content::asMap).collect(Collectors.toList());
         }
     }
 }

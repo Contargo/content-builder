@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.text.MessageFormat;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -106,5 +108,18 @@ public class Content {
         }
 
         return MessageFormat.format("Content [mimeType={0}, content={1}]", mimeType, content);
+    }
+
+
+    static Map<String, Object> asMap(Content content) {
+
+        Map<String, Object> map = new HashMap<>(3);
+
+        map.put("mimeType", content.getMimeType());
+        map.put("content", content.getContent());
+
+        Optional.ofNullable(content.getLocale()).ifPresent(l -> map.put("locale", l.toString()));
+
+        return map;
     }
 }

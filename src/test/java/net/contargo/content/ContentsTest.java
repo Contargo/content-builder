@@ -7,10 +7,13 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -95,5 +98,33 @@ public class ContentsTest {
             null);
         assertContentEquals(contents.get(2), MimeType.TEXT_DESCRIPTION, "Message", null);
         assertContentEquals(contents.get(3), MimeType.TEXT_DESCRIPTION, "Nachricht", Locale.GERMAN);
+    }
+
+
+    @Test
+    public void ensureBuildsAsProperMap() throws Exception {
+
+        List<Map<String, Object>> contents = Contents.withMimeType(MimeType.TEXT_BODY)
+                .andValue("Say it")
+                .andValue("Säg det", new Locale("sv"))
+                .asMap();
+
+        assertNotNull("Missing results", contents);
+        assertEquals("Wrong size", 2, contents.size());
+
+        assertContentEquals(contents.get(0), MimeType.TEXT_BODY, "Say it", null);
+        assertContentEquals(contents.get(1), MimeType.TEXT_BODY, "Säg det", new Locale("sv"));
+    }
+
+
+    private void assertContentEquals(Map<String, Object> entry, MimeType type, String content, Locale locale) {
+
+        assertTrue("Missing required key: mimeType", entry.containsKey("mimeType"));
+        assertTrue("Missing required key: content", entry.containsKey("content"));
+
+        assertEquals("Wrong mime type", type.getMimeType(), entry.get("mimeType"));
+        assertEquals("Wrong content", content, entry.get("content"));
+        assertEquals("Wrong locale", Optional.ofNullable(locale).map(Locale::toString).orElse(null),
+            entry.get("locale"));
     }
 }

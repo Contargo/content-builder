@@ -1,5 +1,8 @@
 package net.contargo.content;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -106,6 +109,14 @@ public final class Contents {
          * @return  a list of map entries
          */
         List<Map<String, Object>> asMap();
+
+
+        /**
+         * Builds the resulting content as a JSON string.
+         *
+         * @return  a JSON string
+         */
+        String asJSON();
     }
 
     private static final class ContentBuilder implements Buildable {
@@ -171,6 +182,17 @@ public final class Contents {
         public List<Map<String, Object>> asMap() {
 
             return this.contents.values.stream().map(Content::asMap).collect(Collectors.toList());
+        }
+
+
+        @Override
+        public String asJSON() {
+
+            try {
+                return new ObjectMapper().writeValueAsString(asMap());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Could not write contents as JSON string", e);
+            }
         }
     }
 }

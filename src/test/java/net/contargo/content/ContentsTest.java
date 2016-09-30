@@ -5,6 +5,8 @@ import net.contargo.content.Contents.Builder;
 
 import org.junit.Test;
 
+import org.skyscreamer.jsonassert.JSONAssert;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -126,5 +128,19 @@ public class ContentsTest {
         assertEquals("Wrong content", content, entry.get("content"));
         assertEquals("Wrong locale", Optional.ofNullable(locale).map(Locale::toString).orElse(null),
             entry.get("locale"));
+    }
+
+
+    @Test
+    public void ensureReturnsJsonString() throws Exception {
+
+        String json = Contents.withMimeType(MimeType.TEXT_BODY)
+                .andValue("Say it")
+                .andValue("Säg det", new Locale("sv"))
+                .asJSON();
+
+        JSONAssert.assertEquals("["
+            + "{mimeType: 'text/vnd.contargo.body', content: 'Say it'}, "
+            + "{mimeType: 'text/vnd.contargo.body', content: 'Säg det', locale: 'sv'}]", json, true);
     }
 }

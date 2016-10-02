@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -27,6 +28,12 @@ public final class Contents {
         // Hidden
     }
 
+
+    public Contents(List<Content> values) {
+
+        this.values.addAll(Optional.ofNullable(values).orElse(Collections.emptyList()));
+    }
+
     /**
      * Creates a new contents builder, starting it of with the given mime-type.
      *
@@ -37,6 +44,15 @@ public final class Contents {
     public static Builder withMimeType(MimeType mimeType) {
 
         return new ContentBuilder(mimeType, new Contents());
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public <T> T forMimeType(MimeType mimeType) {
+
+        return (T) this.values.stream().filter(c -> c.getMimeType().equals(mimeType.getMimeType())).findFirst()
+            .map(Content::getContent)
+            .orElse(null);
     }
 
     /**

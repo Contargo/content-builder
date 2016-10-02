@@ -143,4 +143,18 @@ public class ContentsTest {
             + "{mimeType: 'text/vnd.contargo.body', content: 'Say it'}, "
             + "{mimeType: 'text/vnd.contargo.body', content: 'Säg det', locale: 'sv'}]", json, true);
     }
+
+
+    @Test
+    public void ensureRetrievesContentByMimeType() throws Exception {
+
+        List<Content> contents = Contents.withMimeType(MimeType.TEXT_BODY)
+                .andValue("Say it")
+                .andValue("Säg det", new Locale("sv"))
+                .asList();
+
+        String value = new Contents(contents).forMimeType(MimeType.TEXT_BODY);
+
+        assertEquals("Say it", value);
+    }
 }

@@ -40,6 +40,18 @@ public class Content {
 
 
     /**
+     * Package protected constructor, for content entry instances with byte-array content but no locale.
+     *
+     * @param  mimeType  of the content entry to create
+     * @param  content  of the entry
+     */
+    Content(String mimeType, byte[] content) {
+
+        this(mimeType, content, Optional.empty());
+    }
+
+
+    /**
      * Package protected constructor, for content entry instances with a language locale.
      *
      * @param  mimeType  of the content entry to create
@@ -47,6 +59,20 @@ public class Content {
      * @param  locale  specifying the localized language of the entry
      */
     Content(String mimeType, Object content, Locale locale) {
+
+        this(mimeType, content, Optional.of(locale));
+    }
+
+
+    /**
+     * Package protected constructor, for content entry instances with byte-array content and a specific language
+     * locale.
+     *
+     * @param  mimeType  of the content entry to create
+     * @param  content  of the entry
+     * @param  locale  specifying the localized language of the entry
+     */
+    Content(String mimeType, byte[] content, Locale locale) {
 
         this(mimeType, content, Optional.of(locale));
     }

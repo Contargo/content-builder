@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
@@ -156,5 +157,30 @@ public class ContentsTest {
         String value = new Contents(contents).forMimeType(MimeType.TEXT_BODY);
 
         assertEquals("Say it", value);
+    }
+
+
+    @Test
+    public void ensureRetreivesContentByMimeTypeAndLocale() throws Exception {
+
+        List<Content> contents = Contents.withMimeType(MimeType.TEXT_BODY)
+                .andValue("Say it")
+                .andValue("Säg det", new Locale("sv"))
+                .asList();
+
+        String value = new Contents(contents).forMimeTypeAndLocale(MimeType.TEXT_BODY, new Locale("sv"));
+
+        assertEquals("Säg det", value);
+    }
+
+
+    @Test
+    public void ensureCanCreateAndRetriveBinaryImageData() throws Exception {
+
+        byte[] image = new byte[] { 1, 2, 3 };
+        List<Content> contents = Contents.withMimeType(MimeType.IMAGE_APPICON).andValue(image).asList();
+
+        byte[] value = new Contents(contents).forMimeType(MimeType.IMAGE_APPICON);
+        assertArrayEquals(image, value);
     }
 }

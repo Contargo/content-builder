@@ -62,6 +62,11 @@ public final class MimeType {
     public static final String TEXT_APPICON_VAL = "text/vnd.contargo.appicon";
 
     /**
+     * @see  #IMAGE_APPICON
+     */
+    public static final String IMAGE_APPICON_VAL = "image/vnd.contargo.appicon";
+
+    /**
      * A subject should describe and give context to some content in a single line of text: <code>
      * {@value #TEXT_SUBJECT_VAL}</code>.
      *
@@ -99,6 +104,13 @@ public final class MimeType {
      * @since  0.2
      */
     public static final MimeType TEXT_APPICON = MimeType.of(TEXT_APPICON_VAL);
+
+    /**
+     * Describes an application binary image icon <code>{@value #IMAGE_APPICON_VAL}</code>.
+     *
+     * @since  0.2
+     */
+    public static final MimeType IMAGE_APPICON = MimeType.of(IMAGE_APPICON_VAL);
 
     private final String mimeType;
 

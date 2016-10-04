@@ -122,4 +122,18 @@ public class Content {
 
         return map;
     }
+
+
+    boolean forMimeType(MimeType mimeType) {
+
+        return this.mimeType.equals(mimeType.getMimeType());
+    }
+
+
+    boolean forMimeTypeAndLocale(MimeType mimeType, Locale locale) {
+
+        String lang = this.locale.map(Locale::getLanguage).orElse(null);
+
+        return locale.getLanguage().equals(lang) && this.mimeType.equals(mimeType.getMimeType());
+    }
 }

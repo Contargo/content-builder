@@ -1,5 +1,6 @@
 /**
- * Contains resources for authoring of structured, consumable content, without being bound to a specific business-case.
+ * The {@link net.contargo.content.Contents} class provides a simple builder API for authoring of structured, consumable
+ * content, without being bound to a specific business-case.
  *
  * <p>Content, in the sense of it being defined here, is more direct though of as being consumable, or rendered for some
  * human end-user. A good starting point is to read about or defined {@link net.contargo.content.MimeType mime-types},

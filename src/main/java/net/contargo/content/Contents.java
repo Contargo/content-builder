@@ -29,6 +29,11 @@ public final class Contents {
     }
 
 
+    /**
+     * Creates a new contents instance with the given values.
+     *
+     * @param  values  to append to the new contents instance
+     */
     public Contents(List<Content> values) {
 
         this.values.addAll(Optional.ofNullable(values).orElse(Collections.emptyList()));
@@ -47,10 +52,39 @@ public final class Contents {
     }
 
 
+    /**
+     * Retrieves the content matching the given MIME-type.
+     *
+     * @param  mimeType  predicate to match
+     * @param  <T>  inferring the type of content to retrieve
+     *
+     * @return  the content value found, or {@code null} if not content could be found
+     *
+     * @since  0.2
+     */
     @SuppressWarnings("unchecked")
     public <T> T forMimeType(MimeType mimeType) {
 
-        return (T) this.values.stream().filter(c -> c.getMimeType().equals(mimeType.getMimeType())).findFirst()
+        return (T) this.values.stream().filter(c -> c.forMimeType(mimeType)).findFirst().map(Content::getContent)
+            .orElse(null);
+    }
+
+
+    /**
+     * Retrieves the content matching the given MIME-type and locale.
+     *
+     * @param  mimeType  predicate to match
+     * @param  locale  predicate to match
+     * @param  <T>  inferring the type of content to retrieve
+     *
+     * @return  the content value found, or {@code null} if not content could be found
+     *
+     * @since  0.2
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T forMimeTypeAndLocale(MimeType mimeType, Locale locale) {
+
+        return (T) this.values.stream().filter(c -> c.forMimeTypeAndLocale(mimeType, locale)).findFirst()
             .map(Content::getContent)
             .orElse(null);
     }
@@ -82,6 +116,16 @@ public final class Contents {
          * @return  a buildable builder
          */
         Buildable andValue(String value, Locale locale);
+
+
+        /**
+         * Add a value to the builder for the current default locale.
+         *
+         * @param  value  to add
+         *
+         * @return  a buildable builder
+         */
+        Buildable andValue(byte[] value);
     }
 
     /**
@@ -157,6 +201,16 @@ public final class Contents {
         }
 
 
+        public ContentBuilder(ContentBuilder contentBuilder, byte[] value) {
+
+            this.mimeType = contentBuilder.mimeType;
+            this.contents = contentBuilder.contents;
+
+            Content content = new Content(this.mimeType.getMimeType(), value);
+            this.contents.values.add(content);
+        }
+
+
         private ContentBuilder(ContentBuilder contentBuilder, String value, Locale locale) {
 
             this.mimeType = contentBuilder.mimeType;
@@ -168,6 +222,13 @@ public final class Contents {
 
         @Override
         public Buildable andValue(String value) {
+
+            return new ContentBuilder(this, value);
+        }
+
+
+        @Override
+        public Buildable andValue(byte[] value) {
 
             return new ContentBuilder(this, value);
         }

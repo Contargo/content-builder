@@ -2,6 +2,7 @@ package net.contargo.content;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.text.MessageFormat;
 
@@ -21,58 +22,26 @@ import java.util.Optional;
  * @since  0.1
  */
 @JsonInclude(Include.NON_ABSENT)
+@JsonDeserialize(using = ContentDeserializer.class)
 public class Content {
 
-    private final String mimeType;
-    private final Object content;
-    private final Optional<Locale> locale;
+    private String mimeType;
+    private Object content;
+    private Optional<Locale> locale;
 
-    /**
-     * Package protected constructor, for content entry instances without a locale.
-     *
-     * @param  mimeType  of the content entry to create
-     * @param  content  of the entry
-     */
+    protected Content() {
+
+        // Required!
+    }
+
+
     Content(String mimeType, Object content) {
 
         this(mimeType, content, Optional.empty());
     }
 
 
-    /**
-     * Package protected constructor, for content entry instances with byte-array content but no locale.
-     *
-     * @param  mimeType  of the content entry to create
-     * @param  content  of the entry
-     */
-    Content(String mimeType, byte[] content) {
-
-        this(mimeType, content, Optional.empty());
-    }
-
-
-    /**
-     * Package protected constructor, for content entry instances with a language locale.
-     *
-     * @param  mimeType  of the content entry to create
-     * @param  content  of the entry
-     * @param  locale  specifying the localized language of the entry
-     */
     Content(String mimeType, Object content, Locale locale) {
-
-        this(mimeType, content, Optional.of(locale));
-    }
-
-
-    /**
-     * Package protected constructor, for content entry instances with byte-array content and a specific language
-     * locale.
-     *
-     * @param  mimeType  of the content entry to create
-     * @param  content  of the entry
-     * @param  locale  specifying the localized language of the entry
-     */
-    Content(String mimeType, byte[] content, Locale locale) {
 
         this(mimeType, content, Optional.of(locale));
     }

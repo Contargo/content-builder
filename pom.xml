@@ -31,8 +31,8 @@
     </repositories>
 
     <scm>
-        <connection>scm:git:ssh://git@gitlab-contargo.synyx.de:lib/content-builder.git</connection>
-        <developerConnection>scm:git:ssh://git@gitlab-contargo.synyx.de:lib/content-builder.git</developerConnection>
+        <connection>scm:git:ssh://git@gitlab-contargo.synyx.de/lib/content-builder.git</connection>
+        <developerConnection>scm:git:ssh://git@gitlab-contargo.synyx.de/lib/content-builder.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

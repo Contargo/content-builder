@@ -5,7 +5,7 @@
 
     <groupId>net.contargo.content</groupId>
     <artifactId>content-builder</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0-SNAPSHOT</version>
 
     <name>Content Builder</name>
 
@@ -33,7 +33,7 @@
     <scm>
         <connection>scm:git:ssh://git@gitlab-contargo.synyx.de/lib/content-builder.git</connection>
         <developerConnection>scm:git:ssh://git@gitlab-contargo.synyx.de/lib/content-builder.git</developerConnection>
-        <tag>v0.3.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>

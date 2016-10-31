@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## v0.3
+
+* Add support for mime types with `params`, this enables content entries with
+  variants to be built.
+
 ## v0.2
 
 * Add support for TEXT_APPICON and IMAGE_APPICON mime-types.

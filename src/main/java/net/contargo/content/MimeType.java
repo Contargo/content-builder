@@ -179,4 +179,17 @@ public final class MimeType {
 
         return false;
     }
+
+
+    /**
+     * Appends the given parameters to this mime-type.
+     *
+     * @param  params  to append
+     *
+     * @return  the mime type with the given parameters appended after the semicolon ({@code ;}) separator character
+     */
+    public MimeType withParams(String params) {
+
+        return new MimeType(String.format("%s;%s", mimeType, params));
+    }
 }

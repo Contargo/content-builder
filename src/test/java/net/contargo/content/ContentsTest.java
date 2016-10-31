@@ -161,6 +161,23 @@ public class ContentsTest {
 
 
     @Test
+    public void ensureMatchesVariants() throws Exception {
+
+        List<Content> contents = Contents.withMimeType(MimeType.TEXT_BODY.withParams("foo"))
+                .andValue("variant")
+                .andWithMimeType(MimeType.TEXT_BODY)
+                .andValue("default")
+                .asList();
+
+        String v1 = new Contents(contents).forMimeType(MimeType.TEXT_BODY);
+        String v2 = new Contents(contents).forMimeType(MimeType.TEXT_BODY.withParams("foo"));
+
+        assertEquals("default", v1);
+        assertEquals("variant", v2);
+    }
+
+
+    @Test
     public void ensureRetreivesContentByMimeTypeAndLocale() throws Exception {
 
         List<Content> contents = Contents.withMimeType(MimeType.TEXT_BODY)

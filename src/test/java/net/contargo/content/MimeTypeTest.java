@@ -42,4 +42,11 @@ public class MimeTypeTest {
         assertTrue(MimeType.TEXT_DESCRIPTION.equals("text/vnd.contargo.description"));
         assertTrue(MimeType.TEXT_BODY.equals("text/vnd.contargo.body"));
     }
+
+
+    @Test
+    public void ensureCanCreateMimeTypeVariantsWithParams() throws Exception {
+
+        assertEquals("text/vnd.contargo.appicon;foobar", MimeType.TEXT_APPICON.withParams("foobar").getMimeType());
+    }
 }

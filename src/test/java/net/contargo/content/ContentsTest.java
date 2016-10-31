@@ -200,4 +200,23 @@ public class ContentsTest {
         byte[] value = new Contents(contents).forMimeType(MimeType.IMAGE_APPICON);
         assertArrayEquals(image, value);
     }
+
+
+    @Test
+    public void ensureIgnoresEmptyContentEntries() throws Exception {
+
+        List<Content> contents = Contents.withMimeType(MimeType.TEXT_APPICON)
+                .andValue("    ")
+                .andWithMimeType(MimeType.TEXT_SUBJECT)
+                .andValue("")
+                .andWithMimeType(MimeType.TEXT_BODY)
+                .andValue((String) null)
+                .andWithMimeType(MimeType.TEXT_DESCRIPTION)
+                .andValue("foo")
+                .asList();
+
+        assertNotNull("Missing results", contents);
+        assertEquals("Wrong size", 1, contents.size());
+        assertContentEquals(contents.get(0), MimeType.TEXT_DESCRIPTION, "foo", null);
+    }
 }

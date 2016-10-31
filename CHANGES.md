@@ -5,6 +5,8 @@ Changelog
 
 * Add support for mime types with `params`, this enables content entries with
   variants to be built.
+* Changes the semantics for adding empty strings, trimmable empty strings and
+  null values. Such content entries are now ignored.
 
 ## v0.2
 

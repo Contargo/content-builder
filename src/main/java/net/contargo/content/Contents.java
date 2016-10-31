@@ -223,21 +223,33 @@ public final class Contents {
         @Override
         public Buildable andValue(String value) {
 
-            return new ContentBuilder(this, value);
+            return isNullOrEmpty(value) ? this : new ContentBuilder(this, value);
+        }
+
+
+        private boolean isNullOrEmpty(String value) {
+
+            return value == null || value.trim().isEmpty();
         }
 
 
         @Override
         public Buildable andValue(byte[] value) {
 
-            return new ContentBuilder(this, value);
+            return isNullOrSizeZero(value) ? this : new ContentBuilder(this, value);
+        }
+
+
+        private boolean isNullOrSizeZero(byte[] value) {
+
+            return value == null || value.length == 0;
         }
 
 
         @Override
         public Buildable andValue(String value, Locale locale) {
 
-            return new ContentBuilder(this, value, locale);
+            return isNullOrEmpty(value) ? this : new ContentBuilder(this, value, locale);
         }
 
 

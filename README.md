@@ -1,11 +1,29 @@
 Content Builder
 ===============
 
+[![](https://jitpack.io/v/Contargo/content-builder.svg)](https://jitpack.io/#Contargo/content-builder)
+
 A small library that provides an easy to use API, supporting creation of
 content, in services and back-ends, intended for end-user consumption.
 
 In short - helps you create content in a common format, for web and mobile
 clients.
+
+Gettings started
+----------------
+
+Using `content-builder` in your project, as a library, means simply including
+it as a Maven dependency. We recommend using [Jitpack](https://jitpack.io) to
+resolve the dependency:
+
+```xml
+<dependency>
+  <!-- From Jitpack-repo -->
+  <groupId>com.github.Contargo</groupId>
+  <artifactId>content-builder</artifactId>
+  <version>${SOME-TAG}</version>
+</dependency>
+```
 
 ## General Idea ##
 

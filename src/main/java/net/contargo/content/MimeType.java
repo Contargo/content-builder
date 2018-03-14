@@ -6,13 +6,15 @@ import java.util.Objects;
 /**
  * The declared constant content mime-types.
  *
- * <p>Our use of a {@code mimeType} property, is how we like to classify and structure content. This class is an attempt
- * to define the currently known and supported declarations. By that I mean, since it's basically <i>possible</i> to use
- * whatever string value you want, this is merely a list of the <strong>recommended</strong> ones.</p>
+ * <p>Our use of a {@code mimeType} property, is how we like to classify and structure content. This class is an
+ * attempt to define the currently known and supported declarations. By that I mean, since it's basically <i>
+ * possible</i> to use whatever string value you want, this is merely a list of the <strong>recommended</strong>
+ * ones.</p>
  *
  * <p>Though not strictly IANA or RFC compatible, we have chosen to keep to a structure that expresses <i>some
  * compatibility, and future safety,</i> with said standards. Please note that it's currently also <strong>not</strong>
- * the intent to publish these type definitions, outside of the COLA system landscape.</p>
+ * the intent to publish the type definitions here, as official public extensions, outside of it's use in this library.
+ * </p>
  *
  * <p>Our mime type definitions are defined using the following pattern, with optional variations:</p>
  *
@@ -92,7 +94,8 @@ public final class MimeType {
     public static final MimeType TEXT_BODY = MimeType.of(TEXT_BODY_VAL);
 
     /**
-     * Describes an application icon image resource reference, such as a path or a URI: <code>{@value #TEXT_APPICON_VAL}</code>.
+     * Describes an application icon image resource reference, such as a path or a URI: <code>
+     * {@value #TEXT_APPICON_VAL}</code>.
      *
      * <p>Typically provided for the rendering of a size-independent (scalable) image or background. More specifically,
      * the URI to an application's SVG icon resource.</p>

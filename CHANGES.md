@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## v0.4.0
+
+* Project setup updated for hosting on Github as an open source project. Adding
+  and removing the necessary information and resources.
+
 ## v0.3
 
 * Add support for mime types with `params`, this enables content entries with

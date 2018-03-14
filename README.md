@@ -1,6 +1,7 @@
 Content Builder
 ===============
 
+[![Build Status](https://travis-ci.org/Contargo/content-builder.svg?branch=master)](https://travis-ci.org/Contargo/content-builder)
 [![](https://jitpack.io/v/Contargo/content-builder.svg)](https://jitpack.io/#Contargo/content-builder)
 
 A small library that provides an easy to use API, supporting creation of

@@ -22,7 +22,7 @@ import java.util.Locale;
  */
 public final class ContentDeserializer extends StdDeserializer<Content> {
 
-    private static final String ObjectMapper = null;
+    private static final long serialVersionUID = 1L;
 
     public ContentDeserializer() {
 

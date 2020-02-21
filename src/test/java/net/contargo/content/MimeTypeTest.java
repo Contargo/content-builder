@@ -34,6 +34,7 @@ public class MimeTypeTest {
 
 
     @Test
+    @SuppressWarnings("unlikely-arg-type")
     public void ensureEqualsForStringComparisonIsAvailable() throws Exception {
 
         assertTrue(MimeType.TEXT_SUBJECT.equals("text/vnd.contargo.subject"));

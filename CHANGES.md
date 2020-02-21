@@ -1,9 +1,11 @@
 Changelog
 =========
 
-## v0.5.0
+## v0.4.1
 
-* Add the Spring IO parent dependency as a BOM for dependencies and plugins
+* Minor fixes to the POM, for building on more recent JDKs than 8.
+
+* Add the Spring Boot parent dependency as a base for dependencies and plugins
   used. This aligns the component for better use with projects in and around
   the Spring and Spring Boot eco-system - as is currently intended.
 
